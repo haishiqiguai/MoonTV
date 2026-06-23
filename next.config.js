@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 /* eslint-disable @typescript-eslint/no-var-requires */
+const isDockerBuild = process.env.DOCKER_ENV === 'true';
+
 const nextConfig = {
-  output: 'standalone',
+  ...(isDockerBuild ? { output: 'standalone' } : {}),
   eslint: {
     dirs: ['src'],
   },
